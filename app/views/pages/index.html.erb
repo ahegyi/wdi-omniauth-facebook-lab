@@ -1,3 +1,11 @@
-<h1>Index!</h1>
+<h1>Find My Friends</h1>
 
-<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+<% unless !!@current_user %>
+  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+<% else %>
+  <%= form_tag("/friends", :method => "get") do %>
+    <%= label_tag(:friend_count, "Number of Friends to Show:") %>
+    <%= text_field_tag(:friend_count) %>
+    <%= submit_tag("Show Friends") %>
+  <% end %>
+<% end %>
